@@ -25,9 +25,14 @@ def set_time_offset(new_offset):
         time_offset = -time_offset
 
 def set_time_emulation(new_emulation):
-    """Set time emulation mode: 'realtime', 'offset', 'simulate' """
+    """Set time emulation mode: 'realtime', 'offset', 'simulated' """
     global time_emulation
     time_emulation = new_emulation
+
+def get_time_emulation():
+    """Getter for time emulation mode"""
+    global time_emulation
+    return time_emulation
 
 def set_simulated_time(new_time):
     """Set/update the simulated time"""
@@ -56,13 +61,15 @@ def get_simulated_time():
 def get_current_time():
     """Getter for current time in emulation"""
     global time_offset
-    if time_emulation == "realtime":
+    global time_emulation
+    if time_emulation == "realtime" or time_emulation == "offset":
         return (datetime.now() + time_offset).time()
     else:
         return simulated_time
+    
 def time_is_in_past(time):
     """Returns whether a time is in the past, within the current time emulation"""
-    if time_emulation == "realtime":
+    if time_emulation == "realtime" or time_emulation == "offset":
         current_time = get_current_time()
     else:
         current_time = simulated_time
