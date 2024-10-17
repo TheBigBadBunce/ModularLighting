@@ -39,4 +39,4 @@ Simulate 1 day in 48 seconds (30 minutes simulated every second):
 ### Other arguments
 
 - `verbose`: Verbose debug output
-- `silent` : Remove all console output. Especially useful for running in the background.
+- `silent` : Remove all console output. Especially useful for running in the background. Overrides `verbose`.
