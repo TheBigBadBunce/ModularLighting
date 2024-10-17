@@ -1,4 +1,5 @@
 class Schedule():
+    """A series of events forming a more complicated routine"""
     def generate_events(self):
         raise NotImplementedError()
 
@@ -12,6 +13,7 @@ class Schedule():
         return self.__str__()
     
     def get_debug_info(self):
+        """Helpful information to display when printing this Event"""
         if (self.__class__.__name__ != 'Schedule'):
             raise NotImplementedError() 
         return "WARNING BASE SCHEDULE"

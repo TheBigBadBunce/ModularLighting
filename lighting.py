@@ -4,11 +4,16 @@ from time import sleep
 from devices import Device
 from schedules import *
 from arguments import parse_arguments
+from logging import print, print_verbose, set_silent, set_verbose
+
+set_silent(False)
+set_verbose(True)
+
+"""Core process of lighting app"""
 
 (
     time_emulation,
     time_simulation_increment,
-    verbose,
 ) = parse_arguments()
 
 device = Device(1, "Coffee shop")
@@ -28,7 +33,7 @@ def handle_events_since_last_cycle():
 if time_emulation == 'simulated':
     i = 0
     while(i < (1440 / time_simulation_increment) +1):
-        print(get_simulated_time().strftime('%H:%M'))
+        print(get_current_time().strftime("%H:%M:%S"))
         handle_events_since_last_cycle()
         increase_simulated_time(time_simulation_increment)
         sleep(0.5)
@@ -38,5 +43,5 @@ else: # 'realtime' or 'offset'
     i = 0
     while(True):
         handle_events_since_last_cycle()
-        print(get_current_time())
+        print(get_current_time().strftime("%H:%M:%S"))
         sleep(1)

@@ -1,9 +1,10 @@
 from datetime import time
 from events import TurnOnEvent, TurnOffEvent
-from timeutils import print_time
+from timeutils import time_to_string
 from . import Schedule
         
 class ConsistentDailySchedule(Schedule):
+    """A fixed period when a single device is on"""
     start_time = time(00,00)
     end_time = time(23,59)
     device = None
@@ -21,4 +22,4 @@ class ConsistentDailySchedule(Schedule):
         self.device = device
 
     def get_debug_info(self):
-        return f"{print_time(self.start_time)}-{print_time(self.end_time)}"
+        return f"{time_to_string(self.start_time)}-{time_to_string(self.end_time)}"
