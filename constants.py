@@ -1,0 +1,2 @@
+GPIO_PIN_MAX = 1
+GPIO_PIN_MIN = 0
