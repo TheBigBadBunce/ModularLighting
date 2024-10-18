@@ -5,6 +5,7 @@ from arguments import parse_arguments
 from logging import print_start_message, print_end_message, print_timestamp_only, set_silent, set_verbose, reset_logfile
 from definitions import define_devices_schedules_events
 from ioutils import initialise_GPIO, close_GPIO
+from constants import SIMULATION_PINGS_PER_SECOND
 
 set_silent(False)
 set_verbose(True)
@@ -28,11 +29,11 @@ if get_time_emulation() == 'simulated':
     reset_logfile()
     print_start_message()
     i = 0
-    while(i < (1440 / time_simulation_increment) +1):
+    while(i < ((1440 / time_simulation_increment) * SIMULATION_PINGS_PER_SECOND) +1):
         print_timestamp_only()
         handle_events_since_last_cycle()
-        increase_simulated_time(time_simulation_increment)
-        sleep(0.5)
+        increase_simulated_time(int(time_simulation_increment / SIMULATION_PINGS_PER_SECOND))
+        sleep(1 / SIMULATION_PINGS_PER_SECOND)
         i += 1
 
 else: # 'realtime' or 'offset'
