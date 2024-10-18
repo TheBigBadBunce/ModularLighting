@@ -1,5 +1,3 @@
-import signal
-import sys
 import builtins as __builtin__
 
 from timeutils import get_current_time, get_time_emulation
@@ -66,15 +64,13 @@ def print_timestamp_only():
     """Prints just the current timestamp to dev console"""
     return __builtin__.print(get_current_time().strftime('%H:%M:%S'))
 
-def print_start_and_sigint_message():
-    """Prints start message and primes SIGINT event"""
+def print_start_message():
+    """Prints start message"""
     print(f'Starting {get_time_emulation()} lighting')
 
-    def signal_handler(sig, frame):
-        print(f'Ending {get_time_emulation()} lighting on SIGINT')
-        sys.exit(0)
-
-    signal.signal(signal.SIGINT, signal_handler)
+def print_sigint_message():
+    """Prints end message on SIGINT event"""
+    print(f'Ending {get_time_emulation()} lighting on SIGINT')
 
 def print_end_message():
     """Prints end message"""
