@@ -19,6 +19,7 @@ def initialise_GPIO():
 def setup_led(pin):
     """Register a single LED with GPIO"""
     GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, GPIO.LOW)
 
 def set_GPIO_pin(pin, value):
     """Set the output on an LED"""
