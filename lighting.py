@@ -3,14 +3,16 @@ from time import sleep
 from schedules import *
 from arguments import parse_arguments
 from logging import print_start_message, print_end_message, print_timestamp_only, set_silent, set_verbose, reset_logfile
-from definitions import load_all_events
+from definitions import define_devices_schedules_events
+from ioutils import initialise_GPIO, close_GPIO
 
 set_silent(False)
 set_verbose(True)
 
 ( time_simulation_increment, ) = parse_arguments()
 
-events = load_all_events()
+initialise_GPIO()
+events = define_devices_schedules_events()
 
 def handle_events_since_last_cycle():
     events_for_deletion = []
@@ -42,3 +44,4 @@ else: # 'realtime' or 'offset'
         sleep(1)
 
 print_end_message()
+close_GPIO()
