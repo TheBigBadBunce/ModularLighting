@@ -26,7 +26,7 @@ Run as if it's 14 minutes in the past:
 
 ### Simulate a full day
 
-Runs lighting at an accelerated rate. Takes 1 argument, the rate of simulation in minutes per second.
+Runs lighting at an accelerated rate. Takes 1 argument, the rate of simulation in minutes (simulated) per second (IRL). 
 
 Simulate 1 day in 24 seconds (1 hour simulated every second):
 

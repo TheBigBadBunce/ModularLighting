@@ -36,7 +36,9 @@ def write_to_logfile(line):
     file.close()
 
 def reset_logfile():
-    """Resets logfile to empty, USE WITH CAUTION! Intended use case: clear logfile before simulated lighting"""
+    """Resets logfile to empty, USE WITH CAUTION! 
+       Intended use case: clear logfile before simulated lighting
+    """
     file = open(get_logfile_name(), "w")
     file.write("")
     file.close()

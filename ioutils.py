@@ -4,6 +4,7 @@ import sys
 import RPi.GPIO as GPIO # type: ignore because we develop off the pi
 
 from logging import print_sigint_message
+from constants import GPIO_PWM_FREQ
 
 def initialise_GPIO():
     """Prime GPIO for IO and set sigint handler"""
@@ -21,9 +22,9 @@ def setup_led(pin):
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
 
-def set_GPIO_pin(pin, value):
-    """Set the output on an LED"""
-    GPIO.output(pin, value)
+def create_pwm(pin):
+    """Create a PWM  object for an LED"""
+    return GPIO.PWM(pin, GPIO_PWM_FREQ)
 
 def close_GPIO():
     """Shut down all GPIO functions"""
