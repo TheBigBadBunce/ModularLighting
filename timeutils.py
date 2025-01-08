@@ -1,4 +1,4 @@
-from datetime import datetime, time, timedelta
+from datetime import date, datetime, time, timedelta
 
 def time_to_string(time):
     """Converts a `time` to readable string"""
@@ -67,10 +67,13 @@ def get_current_time():
     else:
         return simulated_time
     
-def time_is_in_past(time):
+def time_is_in_past(time, extra_seconds = 0):
     """Returns whether a time is in the past, within the current time emulation"""
     if time_emulation == "realtime" or time_emulation == "offset":
         current_time = get_current_time()
     else:
         current_time = simulated_time
-    return time <= current_time
+
+    dt_time = datetime.combine(date.today(), time) + timedelta(seconds=extra_seconds)
+    dt_current = datetime.combine(date.today(), current_time)
+    return dt_time <= dt_current

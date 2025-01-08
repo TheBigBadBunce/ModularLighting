@@ -1,3 +1,4 @@
+import threading
 from timeutils import increase_simulated_time, get_time_emulation
 from time import sleep
 from schedules import *
@@ -17,13 +18,20 @@ events = define_devices_schedules_events()
 
 def handle_events_since_last_cycle():
     events_for_deletion = []
+    event_threads = []
     for event in events:
+        event_threads.append(threading.Thread(target=event.handle_event))
         event.handle_event()
         if event.ready_for_deletion():
             events_for_deletion.append(event)
 
     for event in events_for_deletion:
         events.remove(event)
+
+    # Wait for all events to resolve
+    for event_thread in event_threads:
+        event_thread.start()
+        event_thread.join()
 
 if get_time_emulation() == 'simulated':
     reset_logfile()

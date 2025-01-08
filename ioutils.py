@@ -3,11 +3,14 @@ import sys
 
 import RPi.GPIO as GPIO # type: ignore because we develop off the pi
 
-from logging import print_sigint_message
+from logging import print_sigint_message, get_verbose
 from constants import GPIO_PWM_FREQ
 
 def initialise_GPIO():
     """Prime GPIO for IO and set sigint handler"""
+    if not get_verbose():
+        GPIO.setwarnings(False)
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     
     def signal_handler(sig, frame):

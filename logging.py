@@ -8,6 +8,11 @@ def set_verbose(new_verbose):
     global verbose
     verbose = new_verbose
 
+def get_verbose():
+    """Getter for verbose logging"""
+    global verbose
+    return verbose
+
 def set_silent(new_silent):
     """Setter to silence logging"""
     global silent
