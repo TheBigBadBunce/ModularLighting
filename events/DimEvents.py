@@ -26,7 +26,7 @@ class DimOnEvent(DimEvent):
     def handle_event(self):
         if time_is_in_past(self.event_time):
             for i in range (0, 100):
-              self.device.set_gpio_pin(i/100)
+              self.device.set_level(i/100)
               time.sleep(self.dim_time/100)
 
 class DimOffEvent(DimEvent):
@@ -34,5 +34,5 @@ class DimOffEvent(DimEvent):
     def handle_event(self):
         if time_is_in_past(self.event_time):
             for i in range (100, 0):
-              self.device.set_gpio_pin(i/100)
+              self.device.set_level(i/100)
               time.sleep(self.dim_time/100)

@@ -18,10 +18,10 @@ class TurnOnEvent(SimpleEvent):
     """Turns a single device to max"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            self.device.set_gpio_pin(GPIO_PIN_MAX)
+            self.device.set_level(GPIO_PIN_MAX)
 
 class TurnOffEvent(SimpleEvent):
     """Turns a single device to min"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            self.device.set_gpio_pin(GPIO_PIN_MIN)
+            self.device.set_level(GPIO_PIN_MIN)

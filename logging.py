@@ -13,6 +13,16 @@ def get_verbose():
     global verbose
     return verbose
 
+def set_tick_printouts(new_tick_printouts):
+    """Setter for printing of regular timestamps in output"""
+    global tick_printouts
+    tick_printouts = new_tick_printouts
+
+def get_tick_printouts():
+    """Getter for printing of regular timestamps in output"""
+    global tick_printouts
+    return tick_printouts
+
 def set_silent(new_silent):
     """Setter to silence logging"""
     global silent
@@ -52,7 +62,7 @@ def print(line):
     """Print under normal (non-silent) circumstances"""
     global silent
 
-    line = add_timestamp(line)
+    line = add_timestamp(str(line))
     if not silent:
         write_to_logfile(line)
         return __builtin__.print(line)

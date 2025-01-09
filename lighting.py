@@ -3,13 +3,16 @@ from timeutils import increase_simulated_time, get_time_emulation
 from time import sleep
 from schedules import *
 from arguments import parse_arguments
-from logging import print_start_message, print_end_message, print_timestamp_only, set_silent, set_verbose, reset_logfile
+from logging import print_start_message, print_end_message, print_timestamp_only, set_silent, set_verbose, reset_logfile, get_tick_printouts
 from definitions import define_devices_schedules_events
 from ioutils import initialise_GPIO, close_GPIO
 from constants import SIMULATION_PINGS_PER_SECOND
+from dimutils import set_dim
 
 set_silent(False)
 set_verbose(True)
+
+set_dim(100) # 0-100 for PWM percentage
 
 ( time_simulation_increment, ) = parse_arguments()
 
@@ -21,7 +24,6 @@ def handle_events_since_last_cycle():
     event_threads = []
     for event in events:
         event_threads.append(threading.Thread(target=event.handle_event))
-        event.handle_event()
         if event.ready_for_deletion():
             events_for_deletion.append(event)
 
@@ -48,7 +50,8 @@ else: # 'realtime' or 'offset'
     i = 0
     print_start_message()
     while(True):
-        print_timestamp_only()
+        if get_tick_printouts():
+            print_timestamp_only()
         handle_events_since_last_cycle()
         sleep(1)
 
