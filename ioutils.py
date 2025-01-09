@@ -29,6 +29,14 @@ def create_pwm(pin):
     """Create a PWM  object for an LED"""
     return GPIO.PWM(pin, GPIO_PWM_FREQ)
 
+def setup_input(pin):
+    """Register a single input device with GPIO"""
+    GPIO.setup(pin, GPIO.IN)
+
+def get_input(pin):
+    """Get the value of a GPIO input"""
+    return GPIO.input(pin)
+
 def close_GPIO():
     """Shut down all GPIO functions"""
     GPIO.cleanup()
