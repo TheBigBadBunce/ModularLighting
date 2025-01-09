@@ -2,7 +2,6 @@ import argparse
 from datetime import time
 from timeutils import set_time_emulation, set_simulated_time, set_time_offset
 from schedules import *
-from logging import set_silent, set_verbose, set_tick_printouts
 
 def parse_arguments():
     """Parse all command line arguments and return options as appropriate"""
@@ -12,14 +11,13 @@ def parse_arguments():
     parser.add_argument('--simulate', default=None, type=int)
     parser.add_argument('--realtime', default=False, action='store_true')
     parser.add_argument('--offset', default="0", type=str)
+    parser.add_argument('--pir', default=False, action='store_true')
     parser.add_argument('--verbose', default=False, action='store_true')
     parser.add_argument('--tick_printouts', default=False, action='store_true')
     parser.add_argument('--silent', default=False, action='store_true')
     args = parser.parse_args()
 
-    set_silent(args.silent)
-    set_verbose(args.verbose)
-    set_tick_printouts(args.tick_printouts)
+    set_args(args)
 
     run_modes_given = (args.simulate is not None) + (args.realtime) + (args.offset != "0")
 
@@ -48,3 +46,13 @@ def parse_arguments():
     set_time_offset(args.offset)
 
     return (args.simulate,)
+
+def set_args(args):
+    """Store arguments for access from elsewhere"""
+    global arguments
+    arguments = args
+
+def get_args():
+    """Return args namespace (kw lookup wasn't friendly :()"""
+    global arguments
+    return arguments

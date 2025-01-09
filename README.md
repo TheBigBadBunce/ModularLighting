@@ -41,10 +41,13 @@ Simulate 1 day in 48 seconds (30 minutes simulated every second):
 - `verbose`: Verbose debug output
 - `silent` : Remove all console output. Especially useful for running in the background. Overrides `verbose`.
 - `tick_printouts`: Print/log a timestamp every tick. Ignores other log settings.
+- `pir`: Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected
 
 ---
 
 ## TODO
 
-- New mode to permanently keep all lights att 100%
+- New mode to permanently keep all lights at 100%
 - Randomisation of on/off times
+- Config / definition file for devices
+- Add a delay to PIR turnoff

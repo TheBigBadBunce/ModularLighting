@@ -41,6 +41,8 @@ def define_output_devices_schedules_events():
 def define_input_devices():
     """Defines input devices"""
 
+    # TODO also get this from a file
+    # TODO throw an error on startup if this is None and pir is specified
     pir = InputDevice(11)
 
     # Possibility of having multiple inputs later, hence array

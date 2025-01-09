@@ -2,31 +2,7 @@ import builtins as __builtin__
 
 from timeutils import get_current_time, get_time_emulation
 from constants import LOGFILE_REALTIME, LOGFILE_OFFSET, LOGFILE_SIMULATE
-
-def set_verbose(new_verbose):
-    """Setter for verbose logging"""
-    global verbose
-    verbose = new_verbose
-
-def get_verbose():
-    """Getter for verbose logging"""
-    global verbose
-    return verbose
-
-def set_tick_printouts(new_tick_printouts):
-    """Setter for printing of regular timestamps in output"""
-    global tick_printouts
-    tick_printouts = new_tick_printouts
-
-def get_tick_printouts():
-    """Getter for printing of regular timestamps in output"""
-    global tick_printouts
-    return tick_printouts
-
-def set_silent(new_silent):
-    """Setter to silence logging"""
-    global silent
-    silent = new_silent
+from arguments import get_args
 
 def add_timestamp(line):
     """Adds timestamp to output"""
@@ -60,20 +36,15 @@ def reset_logfile():
 
 def print(line):
     """Print under normal (non-silent) circumstances"""
-    global silent
-
     line = add_timestamp(str(line))
-    if not silent:
+    if not get_args().silent:
         write_to_logfile(line)
         return __builtin__.print(line)
     
 def print_verbose(line):
     """Print only when verbose and non-silent"""
-    global silent
-    global verbose
-
     line = add_timestamp(line)
-    if (not silent) and verbose:
+    if (not get_args().silent) and get_args().verbose:
         write_to_logfile(line)
         return __builtin__.print(line)
 
