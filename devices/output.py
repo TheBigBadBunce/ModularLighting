@@ -1,6 +1,6 @@
 from logutils import print
 from dimutils import get_dim
-from ioutils import get_input, setup_led, setup_input, create_pwm
+from ioutils import setup_led, create_pwm
 from constants import GPIO_PIN_MIN, GPIO_PIN_MAX
 
 class OutputDevice():
@@ -40,17 +40,3 @@ class OutputDevice():
         setup_led(self.gpio_pin)
         self.pwm = create_pwm(self.gpio_pin)
         self.pwm.start(self.level)
-
-class InputDevice():
-    """A true/false input e.g PIR sensor"""
-    gpio_pin = None
-
-    def get_level(self):
-        return get_input(self.gpio_pin)
-
-    def __init__(self, gpio_pin):
-        super().__init__()
-        self.gpio_pin = gpio_pin
-
-        setup_input(self.gpio_pin)
-
