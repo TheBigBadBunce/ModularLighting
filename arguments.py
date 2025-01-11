@@ -1,8 +1,6 @@
-import argparse
+import configargparse
 from datetime import time, datetime, timedelta
-from enum import Enum
 import timeutils
-from typing import Literal
 
 def parse_time_offset(new_offset):
     """Parses time offset for offset mode from argument string"""
@@ -28,18 +26,23 @@ def parse_time_offset(new_offset):
 
 def parse_arguments():
     """Parse all command line arguments and return options as appropriate"""
-    parser = argparse.ArgumentParser(
-        prog='Modular City lighting',
-        description='Controls and simulates lighting for my lego modular city')
-    
-    parser.add_argument('--mode', default="realtime", type=str)
-    parser.add_argument('--offset', default="0", type=str)
-    parser.add_argument('--interval', default=60, type=int)
 
-    parser.add_argument('--pir', default=False, action='store_true')
-    parser.add_argument('--verbose', default=False, action='store_true')
-    parser.add_argument('--tick_printouts', default=False, action='store_true')
-    parser.add_argument('--silent', default=False, action='store_true')
+    parser = configargparse.ArgumentParser(
+        prog='Modular City lighting',
+        description='Controls and simulates lighting for my lego modular city.',
+        default_config_files=['./lighting.conf', './lighting.yaml'],
+        formatter_class=configargparse.ArgumentDefaultsRawHelpFormatter)
+    
+    parser.add('-c', '--config', is_config_file=True, help='config file path')
+
+    parser.add('-m', '--mode', default="realtime", type=str, help='Lighting mode. See README.md!')
+    parser.add('-o', '--offset', default="0", type=str, help='Realtime mode only: time difference from current.')
+    parser.add('-i', '--interval', default=60, type=int, help='Simulate mode only: Interval between simulation ticks. Equal to minutes simulated per second.')
+
+    parser.add('-p', '--pir', default=False, action='store_true', help='Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected.')
+    parser.add('-v', '--verbose', default=False, action='store_true', help='Enable verbose debug output')
+    parser.add('-t', '--tick_printouts', default=False, action='store_true', help='Print/log a timestamp every tick. Ignores other log settings (except silent).')
+    parser.add('-s', '--silent', default=False, action='store_true', help='Remove all console output. Especially useful for running in the background. Overrides `verbose`.')
     args = parser.parse_args()
 
     args.offset = parse_time_offset(args.offset)

@@ -45,21 +45,25 @@ Run all lights at maximum level until program is killed..
 
 ### Full arguments list
 
+Provided via command line or config file (`-c`/`--config`)
 
-|Argument           |Accepted values                |Default    |Purpose|
-|---                |---                            |---        |---    |
-|`mode`             |`realtime`/`simulate`/`full`   |"realtime" |Lighting mode. See above.|
-|`offset`           |`HH:MM:SS`, `HH:MM`, `MM`      |0          |Realtime: time difference from current. See above. Simulate: Ignored.|
-|`interval`         |integer, 0 < i < 480           |0          |Simulate: Interval between simulation ticks. Equal to minutes simulated per second. Realtime: Ignored.|
-|`pir`              |boolean                        |false      |Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected|
-|`verbose`          |boolean                        |false      |Verbose debug output|
-|`tick_printouts`   |boolean                        |false      |Print/log a timestamp every tick. Ignores other log settings.|
-|`silent`           |boolean                        |false      |Remove all console output. Especially useful for running in the background. Overrides `verbose`.|
+
+|Argument        |Accepted values             |Default            |Purpose|
+|---             |---                         |---                |---    |
+|`config`        |path to .yaml/.conf file    |lighting.yaml/.conf|Config file for arguments below, via [configargparse](https://pypi.org/project/ConfigArgParse/). Examples provided in `config/`|
+|`mode`          |`realtime`/`simulate`/`full`|"realtime"         |Lighting mode. See above.|
+|`offset`        |`HH:MM:SS`, `HH:MM`, `MM`   |0                  |Realtime: time difference from current. See above. Simulate/full: Ignored.|
+|`interval`      |integer, 0 < i < 480        |0                  |Simulate: Interval between simulation ticks. Equal to minutes simulated per second. Realtime/full: Ignored.|
+|`pir`           |boolean                     |false              |Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected|
+|`verbose`       |boolean                     |false              |Verbose debug output|
+|`tick_printouts`|boolean                     |false              |Print/log a timestamp every tick. Ignores other log settings.|
+|`silent`        |boolean                     |false              |Remove all console output. Especially useful for running in the background. Overrides `verbose`.|
 
 ---
 
 ## TODO
 
 - Randomisation of on/off times
-- Config / definition file for devices
 - Add a delay to PIR turnoff
+- Remove flash when starting realtime (don't update LED level until all updates are done)
+- Testing?
