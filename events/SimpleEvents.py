@@ -1,4 +1,3 @@
-from constants import GPIO_PIN_MAX, GPIO_PIN_MIN
 from timeutils import time_is_in_past, time_to_string
 from . import Event
 
@@ -18,10 +17,10 @@ class TurnOnEvent(SimpleEvent):
     """Turns a single device to max"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            self.device.set_level(GPIO_PIN_MAX)
+            self.device.set_max()
 
 class TurnOffEvent(SimpleEvent):
     """Turns a single device to min"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            self.device.set_level(GPIO_PIN_MIN)
+            self.device.set_min()

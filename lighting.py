@@ -61,7 +61,7 @@ elif mode == 'realtime':
 
 else: # 'full'
     for device in output_devices:
-        device.set_level(1)
+        device.set_max()
     while (True):
         pass
 
