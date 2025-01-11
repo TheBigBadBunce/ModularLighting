@@ -11,7 +11,7 @@ class OutputDevice():
 
     def update_output(self):
         global_dim = get_dim()
-        self.pwm.ChangeDutyCycle(self.level * global_dim)
+        self.pwm.ChangeDutyCycle(self.level * global_dim * 100) # 0-100 for PWM percentage
 
     def set_level(self, value):
         """Set the power(?) on the device's GPIO pin"""

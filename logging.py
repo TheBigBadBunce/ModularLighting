@@ -1,7 +1,7 @@
 import builtins as __builtin__
 
 from timeutils import get_current_time
-from constants import LOGFILE_REALTIME, LOGFILE_SIMULATE
+from constants import LOGFILE_REALTIME, LOGFILE_SIMULATE, LOGFILE_FULL
 from arguments import get_args
 
 def add_timestamp(line):
@@ -14,8 +14,10 @@ def get_logfile_name():
         return LOGFILE_REALTIME
     elif time_emulation == "simulate":
         return LOGFILE_SIMULATE
+    elif time_emulation == "full":
+        return LOGFILE_FULL
     else:
-        raise NotImplementedError()
+        raise NotImplementedError("No logfile exists for this mode")
 
 def write_to_logfile(line):
     """Write to log with timestamp"""

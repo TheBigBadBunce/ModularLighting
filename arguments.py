@@ -51,7 +51,7 @@ def parse_arguments():
             raise ValueError("Simulation interval must be positive")
         if args.interval > 480:
             raise ValueError("Simulation interval over 8 hours is too high to test")
-    elif args.mode != "realtime":
+    elif args.mode not in ["realtime", "full"]:
         raise NotImplementedError("Invalid time emulation selected")
 
 def set_args(args):

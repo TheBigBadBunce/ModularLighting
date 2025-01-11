@@ -37,24 +37,29 @@ Simulate 1 day in 48 seconds (30 minutes simulated every second):
 
 ```python lighting.py --mode=simulate --interval=30```
 
+### All lights on permanently
+
+Run all lights at maximum level until program is killed..
+
+```python lighting.py --mode=full```
+
 ### Full arguments list
 
 
-|Argument           |Accepted values            |Default    |Purpose|
-|---                |---                        |---        |---    |
-|`mode`             |`realtime`/`simulate`      |"realtime" |Lighting mode. See above.|
-|`offset`           |`HH:MM:SS`, `HH:MM`, `MM`  |0          |Realtime: time difference from current. See above. Simulate: Ignored.|
-|`interval`         |integer, 0 < i < 480       |0          |Simulate: Interval between simulation ticks. Equal to minutes simulated per second. Realtime: Ignored.|
-|`pir`              |boolean                    |false      |Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected|
-|`verbose`          |boolean                    |false      |Verbose debug output|
-|`tick_printouts`   |boolean                    |false      |Print/log a timestamp every tick. Ignores other log settings.|
-|`silent`           |boolean                    |false      |Remove all console output. Especially useful for running in the background. Overrides `verbose`.|
+|Argument           |Accepted values                |Default    |Purpose|
+|---                |---                            |---        |---    |
+|`mode`             |`realtime`/`simulate`/`full`   |"realtime" |Lighting mode. See above.|
+|`offset`           |`HH:MM:SS`, `HH:MM`, `MM`      |0          |Realtime: time difference from current. See above. Simulate: Ignored.|
+|`interval`         |integer, 0 < i < 480           |0          |Simulate: Interval between simulation ticks. Equal to minutes simulated per second. Realtime: Ignored.|
+|`pir`              |boolean                        |false      |Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected|
+|`verbose`          |boolean                        |false      |Verbose debug output|
+|`tick_printouts`   |boolean                        |false      |Print/log a timestamp every tick. Ignores other log settings.|
+|`silent`           |boolean                        |false      |Remove all console output. Especially useful for running in the background. Overrides `verbose`.|
 
 ---
 
 ## TODO
 
-- New mode to permanently keep all lights at 100%
 - Randomisation of on/off times
 - Config / definition file for devices
 - Add a delay to PIR turnoff

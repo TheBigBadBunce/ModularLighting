@@ -32,10 +32,10 @@ def get_simulated_time():
 
 def get_current_time():
     """Getter for current time in emulation"""
-    if get_args().mode == "realtime":
-        return (datetime.now() + get_args().offset).time()
-    else:
+    if get_args().mode == 'simulate':
         return simulated_time
+    else:
+        return (datetime.now() + get_args().offset).time()
     
 def time_is_in_past(time, extra_seconds = 0):
     """Returns whether a time is in the past, within the current time emulation"""

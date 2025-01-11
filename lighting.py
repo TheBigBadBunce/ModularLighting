@@ -7,10 +7,10 @@ from arguments import parse_arguments, get_args
 from logging import print_start_message, print_end_message, print_timestamp_only, reset_logfile
 from definitions import define_output_devices_schedules_events, define_input_devices
 from ioutils import initialise_GPIO, close_GPIO
-from dimutils import get_dim, set_dim
+from dimutils import set_dim
 from constants import SIMULATION_TICKS_PER_SECOND
 
-set_dim(100) # 0-100 for PWM percentage
+set_dim(1)
 
 parse_arguments()
 
@@ -34,7 +34,9 @@ def handle_events_since_last_cycle():
         event_thread.start()
         event_thread.join()
 
-if get_args().mode == 'simulate':
+mode = get_args().mode
+
+if mode == 'simulate':
     reset_logfile()
     print_start_message()
     i = 0
@@ -45,7 +47,7 @@ if get_args().mode == 'simulate':
         sleep(1 / SIMULATION_TICKS_PER_SECOND)
         i += 1
 
-else: # 'realtime'
+elif mode == 'realtime':
     i = 0
     print_start_message()
     while(True):
@@ -56,6 +58,12 @@ else: # 'realtime'
             print_timestamp_only()
         handle_events_since_last_cycle()
         sleep(0.1)
+
+else: # 'full'
+    for device in output_devices:
+        device.set_level(1)
+    while (True):
+        pass
 
 print_end_message()
 close_GPIO()
