@@ -1,6 +1,6 @@
 import threading
 from pir import check_pir
-from timeutils import increase_simulated_time, get_time_emulation
+from timeutils import increase_simulated_time
 from time import sleep
 from schedules import *
 from arguments import parse_arguments, get_args
@@ -12,7 +12,7 @@ from constants import SIMULATION_TICKS_PER_SECOND
 
 set_dim(100) # 0-100 for PWM percentage
 
-( time_simulation_increment, ) = parse_arguments()
+parse_arguments()
 
 initialise_GPIO()
 [output_devices, events] = define_output_devices_schedules_events()
@@ -34,18 +34,18 @@ def handle_events_since_last_cycle():
         event_thread.start()
         event_thread.join()
 
-if get_time_emulation() == 'simulated':
+if get_args().mode == 'simulate':
     reset_logfile()
     print_start_message()
     i = 0
-    while(i < ((1440 / time_simulation_increment) * SIMULATION_TICKS_PER_SECOND) +1):
+    while(i < ((1440 / get_args().interval) * SIMULATION_TICKS_PER_SECOND) +1):
         print_timestamp_only()
         handle_events_since_last_cycle()
-        increase_simulated_time(int(time_simulation_increment / SIMULATION_TICKS_PER_SECOND))
+        increase_simulated_time(int(get_args().interval / SIMULATION_TICKS_PER_SECOND))
         sleep(1 / SIMULATION_TICKS_PER_SECOND)
         i += 1
 
-else: # 'realtime' or 'offset'
+else: # 'realtime'
     i = 0
     print_start_message()
     while(True):

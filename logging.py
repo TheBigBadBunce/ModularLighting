@@ -1,7 +1,7 @@
 import builtins as __builtin__
 
-from timeutils import get_current_time, get_time_emulation
-from constants import LOGFILE_REALTIME, LOGFILE_OFFSET, LOGFILE_SIMULATE
+from timeutils import get_current_time
+from constants import LOGFILE_REALTIME, LOGFILE_SIMULATE
 from arguments import get_args
 
 def add_timestamp(line):
@@ -9,12 +9,10 @@ def add_timestamp(line):
     return get_current_time().strftime('%H:%M:%S') + " ~ " + line
 
 def get_logfile_name():
-    time_emulation = get_time_emulation()
+    time_emulation = get_args().mode
     if time_emulation == "realtime":
         return LOGFILE_REALTIME
-    elif time_emulation == "offset":
-        return LOGFILE_OFFSET
-    elif time_emulation == "simulated":
+    elif time_emulation == "simulate":
         return LOGFILE_SIMULATE
     else:
         raise NotImplementedError()
@@ -54,12 +52,12 @@ def print_timestamp_only():
 
 def print_start_message():
     """Prints start message"""
-    print(f'Starting {get_time_emulation()} lighting')
+    print(f'Starting {get_args().mode} lighting')
 
 def print_sigint_message():
     """Prints end message on SIGINT event"""
-    print(f'Ending {get_time_emulation()} lighting on SIGINT')
+    print(f'Ending {get_args().mode} lighting on SIGINT')
 
 def print_end_message():
     """Prints end message"""
-    print(f'Ending {get_time_emulation()} lighting')
+    print(f'Ending {get_args().mode} lighting')
