@@ -11,6 +11,16 @@ Devices are specified within [device definitions](devices.md).
 
 Each schedule definition depends on the type of schedule. These are listed here:
 
+## [Always on](../schedules/ConsistentDailySchedule.py)
+
+Dead simple: Light turns on and never turns off.
+
+```json
+{
+    "type": "always on"
+}
+```
+
 ## [Consistent Daily](../schedules/ConsistentDailySchedule.py)
 
 A simple schedule where the light is on between 2 fixed times.

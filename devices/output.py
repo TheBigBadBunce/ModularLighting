@@ -13,11 +13,12 @@ class OutputDevice():
     min_level = GPIO_PIN_MIN
 
     def update_output(self):
+        """Push updated value to device"""
         global_dim = get_dim()
         self.pwm.ChangeDutyCycle(self.level * global_dim * 100) # 0-100 for PWM percentage
 
     def set_level(self, value):
-        """Set the PWM level on the device's GPIO pin"""
+        """Set the PWM level"""
         print(f"Setting {self.location} to {value}")
         self.level = value
         self.update_output()

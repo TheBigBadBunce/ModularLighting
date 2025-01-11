@@ -2,7 +2,7 @@ import json
 from datetime import time
 from arguments import get_args
 from devices import OutputDevice, InputDevice
-from schedules import ConsistentDailySchedule, ConsistentDimmedDailySchedule
+from schedules import AlwaysOnSchedule, ConsistentDailySchedule, ConsistentDimmedDailySchedule
 from timeutils import parse_time
 
 def create_device(definition):
@@ -19,7 +19,9 @@ def create_device(definition):
     return device
     
 def create_schedule(device, definition):
-    if definition["type"] == "consistent daily":
+    if definition["type"] == "always on":
+        return AlwaysOnSchedule(device)
+    elif definition["type"] == "consistent daily":
         return ConsistentDailySchedule(
             parse_time(definition["start_time"]),
             parse_time(definition["end_time"]),
