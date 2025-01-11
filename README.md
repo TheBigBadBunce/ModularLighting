@@ -1,6 +1,7 @@
 # Modular Lighting control
 
 Designed to run on a Raspberry Pi Zero within my Lego modular city (on a shelf). Python3 throughout!
+This assumes you're already familiar with python basics and [RasPi GPIO configuration](https://thepihut.com/blogs/raspberry-pi-tutorials/27968772-turning-on-an-led-with-your-raspberry-pis-gpio-pins).
 
 ## Running the app
 

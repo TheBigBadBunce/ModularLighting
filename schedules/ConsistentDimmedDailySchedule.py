@@ -13,14 +13,16 @@ class ConsistentDimmedDailySchedule(Schedule):
 
     def generate_events(self):
         return [
-            DimOnEvent(self.start_time, self.device),
-            DimOffEvent(self.end_time, self.device)
+            DimOnEvent(self.start_time, self.dim_up_time, self.device),
+            DimOffEvent(self.end_time, self.dim_down_time, self.device)
         ]
 
-    def __init__(self, start_time, end_time, device):
+    def __init__(self, start_time, end_time, dim_up_time, dim_down_time, device):
         super().__init__()
         self.start_time = start_time
         self.end_time = end_time
+        self.dim_up_time = dim_up_time
+        self.dim_down_time = dim_down_time
         self.device = device
 
     def get_debug_info(self):

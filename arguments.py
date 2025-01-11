@@ -1,6 +1,6 @@
 import configargparse
-from datetime import time, datetime, timedelta
-import timeutils
+from datetime import time, timedelta
+import timeutils # avoid circular import
 
 def parse_time_offset(new_offset):
     """Parses time offset for offset mode from argument string"""
@@ -9,14 +9,8 @@ def parse_time_offset(new_offset):
     if new_offset.startswith('-'):
         negative = True
         new_offset = new_offset[1:]
-    try:
-        parsed_datetime = datetime.strptime(new_offset, "%H:%M:%S")
-    except ValueError:
-        try:
-            parsed_datetime = datetime.strptime(new_offset, "%H:%M")
-        except ValueError:
-            parsed_datetime = datetime.strptime(new_offset, "%M")
-    time_offset = timedelta(hours=parsed_datetime.hour, minutes=parsed_datetime.minute)
+    offset = timeutils.parse_time(new_offset)
+    time_offset = timedelta(hours=offset.hour, minutes=offset.minute)
     
     if negative:
         time_offset = -time_offset
@@ -38,6 +32,8 @@ def parse_arguments():
     parser.add('-m', '--mode', default="realtime", type=str, help='Lighting mode. See README.md!')
     parser.add('-o', '--offset', default="0", type=str, help='Realtime mode only: time difference from current.')
     parser.add('-i', '--interval', default=60, type=int, help='Simulate mode only: Interval between simulation ticks. Equal to minutes simulated per second.')
+
+    parser.add('-d', '--definitions', default='./definitions.json', help='path to device/schedule definition file')
 
     parser.add('-p', '--pir', default=False, action='store_true', help='Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected.')
     parser.add('-v', '--verbose', default=False, action='store_true', help='Enable verbose debug output')

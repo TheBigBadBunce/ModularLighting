@@ -1,6 +1,18 @@
 from datetime import date, datetime, time, timedelta
-
 from arguments import get_args
+
+def parse_time(string):
+    """Parse time string into tuple (hours, minutes)"""
+
+    try:
+        parsed_datetime = datetime.strptime(string, "%H:%M:%S")
+    except ValueError:
+        try:
+            parsed_datetime = datetime.strptime(string, "%H:%M")
+        except ValueError:
+            parsed_datetime = datetime.strptime(string, "%M")
+
+    return time(parsed_datetime.hour, parsed_datetime.minute)
 
 def time_to_string(time):
     """Converts a `time` to readable string"""

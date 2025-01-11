@@ -1,2 +1,3 @@
 from .Schedule import Schedule
 from .ConsistentDailySchedule import ConsistentDailySchedule
+from .ConsistentDimmedDailySchedule import ConsistentDimmedDailySchedule

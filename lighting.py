@@ -5,7 +5,7 @@ from time import sleep
 from schedules import *
 from arguments import parse_arguments, get_args
 from logutils import print_start_message, print_end_message, print_timestamp_only, reset_logfile
-from definitions import define_output_devices_schedules_events, define_input_devices
+from definitions import define_devices_schedules_events
 from ioutils import initialise_GPIO, close_GPIO
 from dimutils import set_dim
 from constants import SIMULATION_TICKS_PER_SECOND
@@ -15,8 +15,8 @@ set_dim(1)
 parse_arguments()
 
 initialise_GPIO()
-[output_devices, events] = define_output_devices_schedules_events()
-[pir] = define_input_devices()
+[output_devices, input_devices, events] = define_devices_schedules_events()
+[pir] = input_devices
 
 def handle_events_since_last_cycle():
     events_for_deletion = []
