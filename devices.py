@@ -1,4 +1,4 @@
-from logging import print
+from logutils import print
 from dimutils import get_dim
 from ioutils import get_input, setup_led, setup_input, create_pwm
 from constants import GPIO_PIN_MIN, GPIO_PIN_MAX
@@ -24,11 +24,9 @@ class OutputDevice():
 
     def set_max(self):
         """Set the level to maximum"""
-        print('max')
         self.set_level(self.max_level)
 
     def set_min(self):
-        print('min')
         """Set the level to minimum"""
         self.set_level(self.min_level)
 

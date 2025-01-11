@@ -3,7 +3,7 @@ import sys
 
 import RPi.GPIO as GPIO # type: ignore because we develop off the pi
 
-from logging import print_sigint_message
+from logutils import print_sigint_message
 from arguments import get_args
 from constants import GPIO_PWM_FREQ
 

@@ -27,7 +27,7 @@ def define_output_devices_schedules_events():
     all_schedules.append(ConsistentDailySchedule(time(18),time(21), hotel_room_12))
     all_output_devices.append(hotel_room_12)
 
-    hotel_room_21 = OutputDevice(5, "Hotel room 21", max_level)
+    hotel_room_21 = OutputDevice(5, "Hotel room 21")
     all_schedules.append(ConsistentDailySchedule(time(10),time(20), hotel_room_21))
     all_output_devices.append(hotel_room_21)
 

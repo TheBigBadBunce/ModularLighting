@@ -50,7 +50,8 @@ def print_verbose(line):
 
 def print_timestamp_only():
     """Prints just the current timestamp to dev console"""
-    return __builtin__.print(get_current_time().strftime('%H:%M:%S'))
+    if not get_args().silent:
+        return __builtin__.print(get_current_time().strftime('%H:%M:%S'))
 
 def print_start_message():
     """Prints start message"""

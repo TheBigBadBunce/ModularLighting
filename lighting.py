@@ -4,7 +4,7 @@ from timeutils import increase_simulated_time
 from time import sleep
 from schedules import *
 from arguments import parse_arguments, get_args
-from logging import print_start_message, print_end_message, print_timestamp_only, reset_logfile
+from logutils import print_start_message, print_end_message, print_timestamp_only, reset_logfile
 from definitions import define_output_devices_schedules_events, define_input_devices
 from ioutils import initialise_GPIO, close_GPIO
 from dimutils import set_dim
