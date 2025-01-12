@@ -26,16 +26,7 @@ def set_simulated_time(new_time):
 def increase_simulated_time(increase_minutes):
     """Move the simulated time forward by increase_minutes"""
     global simulated_time
-
-    new_hours = simulated_time.hour
-    new_minutes = simulated_time.minute + increase_minutes
-    while new_minutes >= 60:
-        new_minutes -= 60
-        new_hours += 1
-    while new_hours >= 24:
-        new_hours = new_hours - 24
-    
-    simulated_time = time(new_hours, new_minutes)
+    simulated_time += timedelta(minutes=increase_minutes)
 
 def get_simulated_time():
     """Getter for simulated time"""
@@ -47,7 +38,7 @@ def get_current_time():
     if get_args().mode == 'simulate':
         return simulated_time
     else:
-        return (datetime.now() + get_args().offset).time()
+        return datetime.now() + get_args().offset
     
 def time_is_in_past(time, extra_seconds = 0):
     """Returns whether a time is in the past, within the current time emulation"""
@@ -57,5 +48,4 @@ def time_is_in_past(time, extra_seconds = 0):
         current_time = simulated_time
 
     dt_time = datetime.combine(date.today(), time) + timedelta(seconds=extra_seconds)
-    dt_current = datetime.combine(date.today(), current_time)
-    return dt_time <= dt_current
+    return dt_time <= current_time

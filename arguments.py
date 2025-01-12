@@ -1,5 +1,5 @@
 import configargparse
-from datetime import time, timedelta
+from datetime import time, timedelta, datetime
 import timeutils # avoid circular import
 
 def parse_time_offset(new_offset):
@@ -45,7 +45,7 @@ def parse_arguments():
     set_args(args)
 
     if args.mode == "simulate":
-        timeutils.set_simulated_time(time(0))
+        timeutils.set_simulated_time(datetime.combine(datetime.today(), time(0)))
         if args.interval <= 0:
             raise ValueError("Simulation interval must be positive")
         if args.interval > 480:

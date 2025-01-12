@@ -33,6 +33,6 @@ class DimOffEvent(DimEvent):
     """Dims a single device to min"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            for i in range (100, 0):
+            for i in range (100, 0, -1):
               self.device.set_level(i/100)
               time.sleep(self.dim_time/100)

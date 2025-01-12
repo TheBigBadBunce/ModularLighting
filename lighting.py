@@ -1,6 +1,6 @@
 import threading
 from pir import check_pir
-from timeutils import increase_simulated_time, time_is_in_past
+from timeutils import increase_simulated_time
 from time import sleep
 from schedules import *
 from arguments import parse_arguments, get_args
