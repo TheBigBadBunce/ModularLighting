@@ -3,6 +3,8 @@
 Designed to run on a Raspberry Pi Zero within my Lego modular city (on a shelf). Python3 throughout!
 This assumes you're already familiar with python basics and [RasPi GPIO configuration](https://thepihut.com/blogs/raspberry-pi-tutorials/27968772-turning-on-an-led-with-your-raspberry-pis-gpio-pins).
 
+Designed to be restarted each day at 4am by `crontab`.
+
 ## Running the app
 
 ### Run in realtime indefinitely
@@ -71,5 +73,4 @@ Provided via command line or config file (`-c`/`--config`)
 ## TODO
 
 - Add a delay to PIR turnoff
-- Remove flash when starting realtime (don't update LED level until all updates are done)
 - Testing?

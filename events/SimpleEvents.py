@@ -11,16 +11,14 @@ class SimpleEvent(Event):
         return time_is_in_past(self.event_time)
 
     def get_debug_info(self):
-        return time_to_string(self.event_time)
+        return f"{self.device.location} {time_to_string(self.event_time)}"
 
 class TurnOnEvent(SimpleEvent):
     """Turns a single device to max"""
     def handle_event(self):
-        if time_is_in_past(self.event_time):
-            self.device.set_max()
+        self.device.set_max()
 
 class TurnOffEvent(SimpleEvent):
     """Turns a single device to min"""
     def handle_event(self):
-        if time_is_in_past(self.event_time):
-            self.device.set_min()
+        self.device.set_min()

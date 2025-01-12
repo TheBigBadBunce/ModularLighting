@@ -2,17 +2,20 @@ from datetime import date, datetime, time, timedelta
 from arguments import get_args
 
 def parse_time(string):
-    """Parse time string into tuple (hours, minutes)"""
+    """Parse time string into datetime"""
 
     try:
-        parsed_datetime = datetime.strptime(string, "%H:%M:%S")
+        parsed_datetime = datetime.combine(datetime.today(), datetime.strptime(string, "%H:%M:%S").time())
     except ValueError:
         try:
-            parsed_datetime = datetime.strptime(string, "%H:%M")
+            parsed_datetime = datetime.combine(datetime.today(), datetime.strptime(string, "%H:%M").time())
         except ValueError:
-            parsed_datetime = datetime.strptime(string, "%M")
+            parsed_datetime = datetime.combine(datetime.today(), datetime.strptime(string, "%M").time())
 
-    return time(parsed_datetime.hour, parsed_datetime.minute)
+    if parsed_datetime.hour < 4:
+        parsed_datetime += timedelta(days=1)
+
+    return parsed_datetime
 
 def time_to_string(time):
     """Converts a `time` to readable string"""
@@ -40,12 +43,11 @@ def get_current_time():
     else:
         return datetime.now() + get_args().offset
     
-def time_is_in_past(time, extra_seconds = 0):
-    """Returns whether a time is in the past, within the current time emulation"""
+def time_is_in_past(dt, extra_seconds = 0):
+    """Returns whether a datetime is in the past, within the current time emulation"""
     if get_args().mode == "realtime":
         current_time = get_current_time()
     else:
         current_time = simulated_time
 
-    dt_time = datetime.combine(date.today(), time) + timedelta(seconds=extra_seconds)
-    return dt_time <= current_time
+    return dt + timedelta(seconds=extra_seconds) <= current_time

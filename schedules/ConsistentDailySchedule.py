@@ -1,13 +1,13 @@
-from datetime import time
+from datetime import datetime
 from events import TurnOnEvent, TurnOffEvent
-from timeutils import time_to_string
+from timeutils import time_to_string, parse_time
 from randomutils import vary_time
 from . import Schedule
         
 class ConsistentDailySchedule(Schedule):
     """A fixed period when a single device is on"""
-    start_time = time(00,00)
-    end_time = time(23,59)
+    start_time = parse_time("4:00")
+    end_time = parse_time("3:59")
     device = None
     variance = 0
 

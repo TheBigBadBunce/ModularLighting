@@ -1,10 +1,10 @@
 import threading
 from pir import check_pir
-from timeutils import increase_simulated_time
+from timeutils import increase_simulated_time, time_is_in_past
 from time import sleep
 from schedules import *
 from arguments import parse_arguments, get_args
-from logutils import print_verbose, print_start_message, print_end_message, print_timestamp_only, reset_logfile
+from logutils import print_start_message, print_end_message, print_timestamp_only, reset_logfile, debug_print_devices_events
 from definitions import define_devices_schedules_events
 from ioutils import initialise_GPIO, close_GPIO
 from dimutils import set_dim
@@ -24,8 +24,8 @@ def handle_events_since_last_cycle():
     events_for_deletion = []
     event_threads = []
     for event in events:
-        event_threads.append(threading.Thread(target=event.handle_event))
-        if event.ready_for_deletion():
+        if time_is_in_past(event.event_time):
+            event_threads.append(threading.Thread(target=event.handle_event))
             events_for_deletion.append(event)
 
     for event in events_for_deletion:
