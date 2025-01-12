@@ -44,7 +44,7 @@ if mode == 'simulate':
     reset_logfile()
     print_start_message()
     i = 0
-    while(i < ((1440 / get_args().interval) * SIMULATION_TICKS_PER_SECOND) +1):
+    while(i < ((1440 / get_args().interval) * SIMULATION_TICKS_PER_SECOND)):
         print_timestamp_only()
         handle_events_since_last_cycle()
         increase_simulated_time(int(get_args().interval / SIMULATION_TICKS_PER_SECOND))

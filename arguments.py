@@ -1,6 +1,7 @@
 import configargparse
-from datetime import time, timedelta, datetime
 import timeutils # avoid circular import
+from datetime import timedelta, datetime
+from constants import DAILY_RESET_TIME
 
 def parse_time_offset(new_offset):
     """Parses time offset for offset mode from argument string"""
@@ -25,27 +26,28 @@ def parse_arguments():
         prog='Modular City lighting',
         description='Controls and simulates lighting for my lego modular city.',
         default_config_files=['./lighting.conf', './lighting.yaml'],
-        formatter_class=configargparse.ArgumentDefaultsRawHelpFormatter)
+        formatter_class=configargparse.ArgumentDefaultsRawHelpFormatter,
+        epilog="More detailed information can be found under docs/ or at https://github.com/TheBigBadBunce/ModularLighting"
+    )
     
     parser.add('-c', '--config', is_config_file=True, help='config file path')
+    parser.add('-d', '--definitions', default='./definitions.json', help='device/schedule definition file path')
 
-    parser.add('-m', '--mode', default="realtime", type=str, help='Lighting mode. See README.md!')
-    parser.add('-o', '--offset', default="0", type=str, help='Realtime mode only: time difference from current.')
-    parser.add('-i', '--interval', default=60, type=int, help='Simulate mode only: Interval between simulation ticks. Equal to minutes simulated per second.')
+    parser.add('-m', '--mode', default="realtime", type=str, help='lighting mode')
+    parser.add('-o', '--offset', default="0", type=str, help='time difference from current (realtime only)')
+    parser.add('-i', '--interval', default=60, type=int, help='interval between simulation ticks (simulate only)')
 
-    parser.add('-d', '--definitions', default='./definitions.json', help='path to device/schedule definition file')
-
-    parser.add('-p', '--pir', default=False, action='store_true', help='Use a PIR sensor (defined in `definitions.py`) to slowly dim lights to 0 when no movement is detected.')
-    parser.add('-v', '--verbose', default=False, action='store_true', help='Enable verbose debug output')
-    parser.add('-t', '--tick_printouts', default=False, action='store_true', help='Print/log a timestamp every tick. Ignores other log settings (except silent).')
-    parser.add('-s', '--silent', default=False, action='store_true', help='Remove all console output. Especially useful for running in the background. Overrides `verbose`.')
+    parser.add('-p', '--pir', default=False, action='store_true', help='use a PIR sensor to dim lights when no movement is detected')
+    parser.add('-v', '--verbose', default=False, action='store_true', help='verbose debug output')
+    parser.add('-t', '--tick_printouts', default=False, action='store_true', help='print/log a timestamp every tick')
+    parser.add('-s', '--silent', default=False, action='store_true', help='remove all console output')
     args = parser.parse_args()
 
     args.offset = parse_time_offset(args.offset)
     set_args(args)
 
     if args.mode == "simulate":
-        timeutils.set_simulated_time(datetime.combine(datetime.today(), time(0)))
+        timeutils.set_simulated_time(datetime.combine(datetime.today(), DAILY_RESET_TIME))
         if args.interval <= 0:
             raise ValueError("Simulation interval must be positive")
         if args.interval > 480:
