@@ -2,13 +2,14 @@ from logutils import print
 from dimutils import get_dim
 from ioutils import setup_led, create_pwm
 from constants import GPIO_PIN_MIN, GPIO_PIN_MAX
+from time import sleep
 
 class OutputDevice():
     """A single LED"""
     gpio_pin = None
     pwm = None
     location = ""
-    level = 0
+    level = 0.0
     max_level = GPIO_PIN_MAX
     min_level = GPIO_PIN_MIN
 
@@ -17,11 +18,24 @@ class OutputDevice():
         global_dim = get_dim()
         self.pwm.ChangeDutyCycle(self.level * global_dim * 100) # 0-100 for PWM percentage
 
-    def set_level(self, value):
+    def set_level(self, value, silent=False):
         """Set the PWM level"""
-        print(f"Setting {self.location} to {value}")
+        if not silent:
+            print(f"Setting {self.location} to {value}")
         self.level = value
         self.update_output()
+
+    def dim_level(self, end_level, length):
+        """Dims the PWM level"""
+        start_level = self.level
+        difference = end_level - start_level
+
+        print(f"Dimming {self.location} from {start_level} to {end_level} ({length}s)")
+
+        for i in range (0, 100):
+            self.set_level(start_level + difference * (i/100), silent=True)
+            sleep(length/100)
+        print(f"Dimming complete.")
 
     def set_max(self):
         """Set the level to maximum"""

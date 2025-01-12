@@ -70,7 +70,9 @@ Provided via command line or config file (`-c`/`--config`)
 
 ## TODO
 
-- Randomisation of on/off times
+- Regular regeneration of events
+    - 4am?
+    - Adjust sim times to match this schedule
 - Add a delay to PIR turnoff
 - Remove flash when starting realtime (don't update LED level until all updates are done)
 - Testing?

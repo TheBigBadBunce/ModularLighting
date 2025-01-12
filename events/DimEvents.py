@@ -1,4 +1,3 @@
-import time
 from constants import GPIO_PIN_MAX, GPIO_PIN_MIN
 from timeutils import time_is_in_past, time_to_string
 from . import Event
@@ -25,14 +24,10 @@ class DimOnEvent(DimEvent):
     """Dims a single device to max"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            for i in range (0, 100):
-              self.device.set_level(i/100)
-              time.sleep(self.dim_time/100)
+            self.device.dim_level(1, self.dim_time)
 
 class DimOffEvent(DimEvent):
     """Dims a single device to min"""
     def handle_event(self):
         if time_is_in_past(self.event_time):
-            for i in range (100, 0, -1):
-              self.device.set_level(i/100)
-              time.sleep(self.dim_time/100)
+            self.device.dim_level(0, self.dim_time)
