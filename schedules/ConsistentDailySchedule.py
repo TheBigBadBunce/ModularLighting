@@ -1,6 +1,7 @@
 from datetime import time
 from events import TurnOnEvent, TurnOffEvent
 from timeutils import time_to_string
+from randomutils import vary_time
 from . import Schedule
         
 class ConsistentDailySchedule(Schedule):
@@ -8,14 +9,17 @@ class ConsistentDailySchedule(Schedule):
     start_time = time(00,00)
     end_time = time(23,59)
     device = None
+    variance = 0
 
     def generate_events(self):
+        start_time = vary_time(self.start_time, self.variance)
+        end_time = vary_time(self.end_time, self.variance)
         return [
-            TurnOnEvent(self.start_time, self.device),
-            TurnOffEvent(self.end_time, self.device)
+            TurnOnEvent(start_time, self.device),
+            TurnOffEvent(end_time, self.device)
         ]
 
-    def __init__(self, start_time, end_time, device):
+    def __init__(self, start_time, end_time, device, **kwargs):
         super().__init__()
         self.start_time = start_time
         self.end_time = end_time

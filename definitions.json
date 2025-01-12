@@ -4,7 +4,7 @@
         "pin": 26,
         "location": "Art shop",
         "schedules": [
-            { "type": "consistent daily", "start_time": "9:00", "end_time": "19:00" }
+            { "type": "consistent daily", "start_time": "9:00", "end_time": "19:00", "variance": 120 }
         ]
     },
     {
@@ -12,7 +12,7 @@
         "pin": 19,
         "location": "Hotel Lobby",
         "schedules": [
-            { "type": "consistent daily", "start_time": "5:00", "end_time": "23:59" }
+            { "type": "consistent daily", "start_time": "5:00", "end_time": "23:59", "variance": 120 }
         ]
     },
     {
@@ -20,7 +20,9 @@
         "pin": 13,
         "location": "Hotel room 11",
         "schedules": [
-            { "type": "consistent daily", "start_time": "7:00", "end_time": "8:00" }
+            { "type": "consistent daily", "start_time": "7:00", "end_time": "8:00", "variance": 12 },
+            { "type": "consistent daily", "start_time": "13:00", "end_time": "14:00", "variance": 12 },
+            { "type": "consistent daily", "start_time": "18:00", "end_time": "19:00", "variance": 12 }
         ]
     },
     {
@@ -28,8 +30,8 @@
         "pin": 6,
         "location": "Hotel room 12",
         "schedules": [
-            { "type": "consistent daily", "start_time": "6:30", "end_time": "8:30" },
-            { "type": "consistent daily", "start_time": "18:00", "end_time": "21:00" }
+            { "type": "consistent daily", "start_time": "6:30", "end_time": "8:30", "variance": 120 },
+            { "type": "consistent daily", "start_time": "18:00", "end_time": "21:00", "variance": 120 }
         ]
     },
     {

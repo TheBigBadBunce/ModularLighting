@@ -22,11 +22,14 @@ def create_schedule(device, definition):
     if definition["type"] == "always on":
         return AlwaysOnSchedule(device)
     elif definition["type"] == "consistent daily":
-        return ConsistentDailySchedule(
+        schedule = ConsistentDailySchedule(
             parse_time(definition["start_time"]),
             parse_time(definition["end_time"]),
             device
         )
+        try: schedule.variance = definition["variance"]
+        except KeyError: pass
+        return schedule
     elif definition["type"] == "consistent daily dimmed":
         return ConsistentDimmedDailySchedule(
             parse_time(definition["start_time"]), 

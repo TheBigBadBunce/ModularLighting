@@ -37,6 +37,7 @@ A simple schedule where the light is on between 2 fixed times.
 |---            |---    |
 |`start_time`   |When the light switches on|
 |`end_time`     |When the light switches off|
+|`variance`     |Random variance on event time (in minutes)|
 
 ## [Consistent Daily Dimmed](../schedules/ConsistentDimmedDailySchedule.py)
 
