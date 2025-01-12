@@ -59,3 +59,4 @@ Almost identical to Consistent Daily Schedule, with a steady dim on/off.
 |`end_time`     |When the light switches off|
 |`dim_up_time`  |Time taken for the light to dim on, in seconds|
 |`dim_down_time`|Time taken for the light to dim off, in seconds|
+|`variance`     |Random variance on event time (in minutes)|

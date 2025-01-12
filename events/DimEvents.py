@@ -15,7 +15,7 @@ class DimEvent(Event):
         return time_is_in_past(self.event_time, extra_seconds=self.dim_time)
 
     def get_debug_info(self):
-        return time_to_string(self.event_time) + "/" + self.dim_time + "s"
+        return time_to_string(self.event_time) + "/" + str(self.dim_time) + "s"
     
     def __init__(self, event_time, dim_time, device):
         self.dim_time = dim_time
