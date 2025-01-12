@@ -66,4 +66,9 @@ def define_devices_schedules_events():
     for schedule in all_schedules:
         all_events += schedule.generate_events()
 
+    # Events don't need to be sorted, this is mostly for debug
+    def get_event_time(event):
+        return event.event_time
+    all_events.sort(key=get_event_time)
+
     return [all_output_devices, all_input_devices, all_events]

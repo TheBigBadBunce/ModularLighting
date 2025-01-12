@@ -15,7 +15,7 @@
             {
                 "type": "consistent daily dimmed",
                 "start_time": "5:00",
-                "end_time": "23:59",
+                "end_time": "02:00",
                 "dim_up_time": 3,
                 "dim_down_time": 5,
                 "variance": 0

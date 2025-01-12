@@ -19,7 +19,7 @@ class ConsistentDailySchedule(Schedule):
             TurnOffEvent(end_time, self.device)
         ]
 
-    def __init__(self, start_time, end_time, device, **kwargs):
+    def __init__(self, start_time, end_time, device):
         super().__init__()
         self.start_time = start_time
         self.end_time = end_time

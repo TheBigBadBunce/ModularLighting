@@ -18,9 +18,7 @@ initialise_GPIO()
 [output_devices, input_devices, events] = define_devices_schedules_events()
 [pir] = input_devices
 
-print_verbose(f'Parsed output devices: f{output_devices}')
-print_verbose(f'Parsed input devices: f{input_devices}')
-print_verbose(f'Generated events: f{events}')
+debug_print_devices_events(output_devices, input_devices, events) # sort
 
 def handle_events_since_last_cycle():
     events_for_deletion = []

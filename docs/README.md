@@ -12,7 +12,7 @@ No arguments necessary.
 
 ```python lighting.py --mode=realtime```
 
-This is the default mode so can also be run as `python lighting.py`....
+This is the default mode so can also be run as `python lighting.py`.
 
 ### Run in realtime with a time offset
 
@@ -70,9 +70,6 @@ Provided via command line or config file (`-c`/`--config`)
 
 ## TODO
 
-- Regular regeneration of events
-    - 4am?
-    - Adjust sim times to match this schedule
 - Add a delay to PIR turnoff
 - Remove flash when starting realtime (don't update LED level until all updates are done)
 - Testing?
