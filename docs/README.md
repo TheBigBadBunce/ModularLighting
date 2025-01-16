@@ -72,5 +72,6 @@ Provided via command line or config file (`-c`/`--config`)
 
 ## TODO
 
+- sunlight schedule (map to sunrise/sunset for the day)
 - Add a delay to PIR turnoff
 - Testing?
